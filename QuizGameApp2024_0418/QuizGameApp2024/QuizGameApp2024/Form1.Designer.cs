@@ -45,6 +45,7 @@
             this.lblPresent2 = new System.Windows.Forms.Label();
             this.picMathlady = new System.Windows.Forms.PictureBox();
             this.btnAnswer4 = new System.Windows.Forms.Button();
+            this.totalScoreMsglbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxCorrect)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxIncorrect)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMathlady)).BeginInit();
@@ -197,7 +198,7 @@
             this.btnExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnExit.Font = new System.Drawing.Font("Yu Gothic UI", 18F, System.Drawing.FontStyle.Bold);
-            this.btnExit.Location = new System.Drawing.Point(95, 535);
+            this.btnExit.Location = new System.Drawing.Point(92, 555);
             this.btnExit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(198, 77);
@@ -272,6 +273,17 @@
             this.btnAnswer4.Visible = false;
             this.btnAnswer4.Click += new System.EventHandler(this.checkAnswer_Click);
             // 
+            // totalScoreMsglbl
+            // 
+            this.totalScoreMsglbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalScoreMsglbl.Location = new System.Drawing.Point(85, 377);
+            this.totalScoreMsglbl.Name = "totalScoreMsglbl";
+            this.totalScoreMsglbl.Size = new System.Drawing.Size(755, 136);
+            this.totalScoreMsglbl.TabIndex = 18;
+            this.totalScoreMsglbl.Text = "label1";
+            this.totalScoreMsglbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.totalScoreMsglbl.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -279,6 +291,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.BackgroundImage = global::QuizGameApp2024.Properties.Resources.hand_drawn_question_mark_pattern_23_2149416651;
             this.ClientSize = new System.Drawing.Size(1164, 755);
+            this.Controls.Add(this.totalScoreMsglbl);
             this.Controls.Add(this.picMathlady);
             this.Controls.Add(this.lblPresent2);
             this.Controls.Add(this.lblPresentation);
@@ -325,6 +338,7 @@
         private System.Windows.Forms.Label lblPresent2;
         private System.Windows.Forms.PictureBox picMathlady;
         private System.Windows.Forms.Button btnAnswer4;
+        private System.Windows.Forms.Label totalScoreMsglbl;
     }
 }
 

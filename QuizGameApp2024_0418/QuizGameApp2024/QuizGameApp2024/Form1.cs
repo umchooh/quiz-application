@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -140,7 +141,7 @@ namespace QuizGameApp2024
                 btnAnswer2.Enabled = true;
                 btnAnswer3.Enabled = true;
                 btnAnswer4.Enabled = true;
-                btnStart.Visible = false;
+                
                 lblQuestion.Text = questionsList[0].Questions;
                 btnAnswer1.Text = questionsList[0].Answers[0];
                 btnAnswer2.Text = questionsList[0].Answers[1];
@@ -162,7 +163,6 @@ namespace QuizGameApp2024
                 lblyourscore.Visible = true;
                 lblPoints.Text = $"{score} Points";
                 btnExit.Visible = true;
-
 
                 btnAnswer1.BackColor = Color.White;
                 btnAnswer2.BackColor = Color.White;
@@ -200,16 +200,13 @@ namespace QuizGameApp2024
                 //Stored the right answer (str)
                 string rightAnswer = questionsList[currentQuestion].Answers[answerIndex];
 
-                //Called the method( selected button's name), to changed the status of other buttons, to prevent double-clicking
+                //Called the method(selected button's name),
+                //to disabled the other buttons, to prevent double-clicking
                 isEnabledOnButtons(button.Name);
 
                 //Compared the selectedButton's Text and the rightAnswer 
                 if (button.Text.Equals(rightAnswer))
                 {
-                    btnAnswer1.Enabled = false;
-                    btnAnswer2.Enabled = false;
-                    btnAnswer3.Enabled = false;
-                    btnAnswer4.Enabled = false;
                     btnNext.Enabled = true;
                     button.BackColor = Color.LightGreen;
                     picBoxCorrect.Visible = true;
@@ -220,18 +217,18 @@ namespace QuizGameApp2024
                 }
                 else
                 {
-                    btnAnswer1.Enabled = false;
-                    btnAnswer2.Enabled = false;
-                    btnAnswer3.Enabled = false;
-                    btnAnswer4.Enabled = false;
+                    //If wrong button is selected
                     btnNext.Enabled = true;
                     button.BackColor = Color.OrangeRed;
                     picBoxCorrect.Visible = false;
                     picBoxIncorrect.Visible = true;
                     lblAnswer.Visible = true;
                     lblAnswer.Text = "Oops...";
+
                     //"The correct answer is " + rightAnswer
                     picBoxIncorrect.Visible = true;
+
+                    //To display the correct button with green background
                     if (answerIndex == 0)
                     {
                         btnAnswer1.BackColor = Color.LightGreen;
@@ -254,9 +251,10 @@ namespace QuizGameApp2024
                 lblPoints.Text = $"{score} Points";
                 selectedQuestionIndex++;
 
-                //Update the GUI
+                //Update the GUI when it is in the last question
                 if (selectedQuestionIndex != questionsList.Count)
                 {
+                    
                     clearBtn.Visible = false;
                     btnNext.Visible = true;
                 }
@@ -264,8 +262,8 @@ namespace QuizGameApp2024
                 {
                     btnNext.Visible = false;
                     clearBtn.Visible = true;
-                    //totalScoreMsglbl.Visible = true;
-                    //totalScoreMsglbl.Text = "Well Done! Your total score is " + lblPoints.Text;
+                    displayTotalMessage();
+                    
                 }
 
             }
@@ -280,12 +278,19 @@ namespace QuizGameApp2024
             }
         }
 
+        private void displayTotalMessage()
+        {
+            //To Display the total score - to alert the user is at the last question
+            totalScoreMsglbl.Visible = true;
+            totalScoreMsglbl.Text = "Well Done! Your total score is " + lblPoints.Text;
+        }
 
-        //To enabled the buttons, reset the text Label and display the next questions
+        
         private void btnNext_Click(object sender, EventArgs e)
         {
             try
             {
+                //To enabled the buttons, reset the text Label and display the next questions
                 log.Debug("Next question " + selectedQuestionIndex + " is displaying....");
                 picBoxCorrect.Visible = false;
                 picBoxIncorrect.Visible = false;
@@ -300,15 +305,6 @@ namespace QuizGameApp2024
                 btnAnswer3.Enabled = true;
                 btnAnswer4.Enabled = true;
 
-                btnStart.Visible = false;
-                lblQuestion.Visible = true;
-                btnAnswer1.Visible = true;
-                btnAnswer2.Visible = true;
-                btnAnswer3.Visible = true;
-                btnAnswer4.Visible = true;
-                lblAnswer.Visible = true;
-                lblPoints.Visible = true;
-                lblyourscore.Visible = true;
                 // To reset the popUpLabel;
                 lblAnswer.Text = "";
                 lblAnswer.Visible = false;
@@ -336,6 +332,7 @@ namespace QuizGameApp2024
         {
             try
             {
+                //To reloading the quiz with new Form1 and dispoased the memory of old form
                 log.Info("Game restart...");
                 Form1 newForm = new Form1();
                 newForm.Show();
@@ -354,6 +351,7 @@ namespace QuizGameApp2024
 
         private static void FisherYatesShuffle<T>(List<T> list)
         {
+            // Shuffle ()
             Random random = new Random();
             int n = list.Count;
 
